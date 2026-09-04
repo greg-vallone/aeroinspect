@@ -1,13 +1,19 @@
-import InspectionList from "./components/inspection-list/inspection-list.component";
+import Header from "./components/header/header.component";
+import Sidebar from "./components/sidebar/sidebar.component";
+import Dashboard from "./pages/dashboard/dashboard";
+
+import "./App.css"
 
 const App = () => {
   return (
-    <div>
-      <h1>AeroInspect</h1>
-      <p>Inspection Management Platform</p>
+    <>
+      <Header/>
 
-      <InspectionList/>
-    </div>
+      <div className="app-layout">
+        <Sidebar/>
+        <Dashboard/>
+      </div>
+    </>
   );
 }
 
