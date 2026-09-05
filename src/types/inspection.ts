@@ -8,7 +8,7 @@ export type InspectionStatus =
   export type InspectionFilter = "All" | InspectionStatus;
 export interface Inspection {
   id: number;
-  siteName: string;
+  siteId: number;
   inspectionDate: string;
   inspector: string;
   status: InspectionStatus;

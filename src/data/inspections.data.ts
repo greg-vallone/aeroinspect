@@ -4,21 +4,21 @@ import type { Inspection } from "../types/inspection";
 export const inspections: Inspection[] = [
   {
     id: 1,
-    siteName: "North Ridge Wind Farm",
+    siteId: 1,
     inspectionDate: "2026-09-03",
     inspector: "John Smith",
     status: "Complete",
   },
   {
     id: 2,
-    siteName: "West Valley Solar Park",
+    siteId: 2,
     inspectionDate: "2026-09-02",
     inspector: "Sarah Jones",
     status: "Under Review",
   },
   {
     id: 3,
-    siteName: "East Ridge Wind Farm",
+    siteId: 3,
     inspectionDate: "2026-09-01",
     inspector: "Michael Brown",
     status: "In Progress",

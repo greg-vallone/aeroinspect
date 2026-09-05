@@ -5,6 +5,7 @@ import Sidebar from "./components/sidebar/sidebar.component";
 import Dashboard from "./pages/dashboard";
 import Sites from "./pages/sites";
 import Inspections from "./pages/inspections";
+import InspectionDetails from "./pages/inspection-details";
 
 import "./App.css"
 
@@ -21,6 +22,9 @@ const App = () => {
             <Route path="/" element={<Dashboard/>} />
             <Route path="/sites" element={<Sites/>} />
             <Route path="/inspections" element={<Inspections/>} />
+            <Route path="/inspections/:inspectionId"
+              element={<InspectionDetails/>}
+            ></Route>
           </Routes>
         </div>
 

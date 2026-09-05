@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { inspections } from "../../data/inspections.data";
 import type { InspectionFilter } from "../../types/inspection";
+import { Link } from "react-router-dom";
+import { sites } from "../../data/sites.data";
 
 const InspectionList = () => {
     const [selectedStatus, setSelectedStatus] = useState<InspectionFilter>('All')
@@ -32,14 +34,19 @@ const InspectionList = () => {
             {filteredInspections.length === 0 && (<p>No inspections match the selected status.</p>)}
             {filteredInspections.length !== 0 && (<p>Showing {filteredInspections.length} inspections</p>)}
             
-            {filteredInspections.map((inspection) =>(
-                <div className="inspection-item" key={inspection.id}>
-                    <h3>{inspection.siteName}</h3>
-                    <p>Date: {inspection.inspectionDate}</p>
-                    <p>Inspector: {inspection.inspector}</p>
-                    <p>Status: {inspection.status}</p>
-                </div>
-            ))}
+            {filteredInspections.map((inspection) =>{
+                const matchingSite = sites.find((site) => site.id === inspection.siteId);
+                return (
+                      <div className="inspection-item" key={inspection.id}>
+                        <h3>
+                            <Link to={`/inspections/${inspection.id}`}>{matchingSite?.name}</Link>
+                        </h3>
+                        <p>Date: {inspection.inspectionDate}</p>
+                        <p>Inspector: {inspection.inspector}</p>
+                        <p>Status: {inspection.status}</p>
+                      </div>
+                )  
+            })}
         </div>
     )
 }
