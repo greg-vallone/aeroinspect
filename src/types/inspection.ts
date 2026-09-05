@@ -5,6 +5,7 @@ export type InspectionStatus =
   | "Under Review"
   | "Complete";
 
+  export type InspectionFilter = "All" | InspectionStatus;
 export interface Inspection {
   id: number;
   siteName: string;

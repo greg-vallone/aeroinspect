@@ -13,8 +13,11 @@ const Dashboard = () => {
                 <StatCard title="Pending Inspections" value={7} />
                 <StatCard title="Open Findings" value={14} />
             </section>
-
-            <InspectionList/>
+            <div>
+                <h2>Recent Inspections</h2>
+                <InspectionList/>
+            </div>
+            
         </main>
     );
 }

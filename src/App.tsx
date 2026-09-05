@@ -16,13 +16,13 @@ const App = () => {
       <div className="app-layout">
         <Sidebar/>
 
-      <div className="content">
-        <Routes>
-          <Route path="/" element={<Dashboard/>} />
-          <Route path="/sites" element={<Sites/>} />
-          <Route path="/inspections" element={<Inspections/>} />
-        </Routes>
-      </div>
+        <div className="content">
+          <Routes>
+            <Route path="/" element={<Dashboard/>} />
+            <Route path="/sites" element={<Sites/>} />
+            <Route path="/inspections" element={<Inspections/>} />
+          </Routes>
+        </div>
 
       </div>
     </BrowserRouter>

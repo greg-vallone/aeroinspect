@@ -1,11 +1,39 @@
+import { useState } from "react";
 import { inspections } from "../../data/inspections.data";
+import type { InspectionFilter } from "../../types/inspection";
 
 const InspectionList = () => {
+    const [selectedStatus, setSelectedStatus] = useState<InspectionFilter>('All')
+
+    const filteredInspections =
+        selectedStatus === "All"
+          ? inspections
+          : inspections.filter((inspection) => inspection.status === selectedStatus);
+
     return (
         <div>
-            <h2>Recent Inspections</h2>
-            {inspections.map((inspection) =>(
-                <div key={inspection.id}>
+            <div className="inspection-filter">
+                <label htmlFor="status-filter">Filter by Status:</label>
+
+                <select
+                name="status-filter"
+                id="status-filter"
+                value={selectedStatus}
+                onChange={(event) => setSelectedStatus(event.target.value)}
+                >
+                <option value="All">All</option>
+                <option value="Scheduled">Scheduled</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Under Review">Under Review</option>
+                <option value="Complete">Complete</option>
+                </select>
+            </div>
+
+            {filteredInspections.length === 0 && (<p>No inspections match the selected status.</p>)}
+            {filteredInspections.length !== 0 && (<p>Showing {filteredInspections.length} inspections</p>)}
+            
+            {filteredInspections.map((inspection) =>(
+                <div className="inspection-item" key={inspection.id}>
                     <h3>{inspection.siteName}</h3>
                     <p>Date: {inspection.inspectionDate}</p>
                     <p>Inspector: {inspection.inspector}</p>
