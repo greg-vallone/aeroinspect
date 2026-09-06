@@ -1,24 +1,35 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { inspections } from "../data/inspections.data";
-import { sites } from "../data/sites.data";
 import FindingCard from "../components/finding-card/finding-card.component";
 import FindingForm from "../components/finding-form/finding-form.component";
 import type { Finding } from "../types/findings";
 import { findings } from "../data/findings.data";
+import { getSiteForInspection } from "../utils/siteUtils";
 
 
 const InspectionDetails = () => {
-    const { inspectionId } = useParams();
+    const { inspectionId } = useParams<{inspectionId:string}>();
+    const id = Number(inspectionId);
 
-    const inspection = inspections.find((inspection) => inspection.id === Number(inspectionId));
+    const inspection = inspections.find((inspection) => inspection.id === id);
 
-    const matchingSite = sites.find(
-        (site) => site.id === Number(inspectionId)
+    if (!inspection) {
+    return (
+        <main>
+            <h2>Inspection Not Found</h2>
+            <p>The requested inspection could not be found.</p>
+                    <Link to="/inspections">
+          ← Back to Inspections
+        </Link>
+        </main>
     );
+    }
+
+    const matchingSite = getSiteForInspection(inspection);
 
     const [inspectionFindings, setInspectionFindings] = useState<Finding[]>(findings.filter(
-        (finding) => finding.inspectionId === Number(inspectionId)) 
+        (finding) => finding.inspectionId === inspection.id) 
     );
 
     const handleAddFinding = (title:string, description:string, severity:Finding["severity"]) => {
@@ -32,14 +43,7 @@ const InspectionDetails = () => {
           setInspectionFindings((currentFindings) => [...currentFindings, newFinding,]);
     }
 
-    if (!inspection) {
-        return (
-            <main>
-                <h2>Inspection Not Found</h2>
-                <p>The requested inspection could not be found.</p>
-            </main>
-        );
-    }
+
     return (
         <main>
             <h2>Inspection Details</h2>

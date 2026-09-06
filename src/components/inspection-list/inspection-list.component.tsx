@@ -2,7 +2,7 @@ import { useState } from "react";
 import { inspections } from "../../data/inspections.data";
 import type { InspectionFilter } from "../../types/inspection";
 import { Link } from "react-router-dom";
-import { sites } from "../../data/sites.data";
+import { getSiteForInspection } from "../../utils/siteUtils";
 
 const InspectionList = () => {
     const [selectedStatus, setSelectedStatus] = useState<InspectionFilter>('All')
@@ -21,7 +21,7 @@ const InspectionList = () => {
                 name="status-filter"
                 id="status-filter"
                 value={selectedStatus}
-                onChange={(event) => setSelectedStatus(event.target.value)}
+                onChange={(event) => setSelectedStatus(event.target.value as InspectionFilter)}
                 >
                 <option value="All">All</option>
                 <option value="Scheduled">Scheduled</option>
@@ -35,7 +35,7 @@ const InspectionList = () => {
             {filteredInspections.length !== 0 && (<p>Showing {filteredInspections.length} inspections</p>)}
             
             {filteredInspections.map((inspection) =>{
-                const matchingSite = sites.find((site) => site.id === inspection.siteId);
+                const matchingSite = getSiteForInspection(inspection);
                 return (
                       <div className="inspection-item" key={inspection.id}>
                         <h3>
