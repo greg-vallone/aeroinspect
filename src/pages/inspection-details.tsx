@@ -1,9 +1,8 @@
-import { useState } from "react";
+
 import { Link, useParams } from "react-router-dom";
 import { inspections } from "../data/inspections.data";
-import FindingCard from "../components/finding-card/finding-card.component";
-import FindingForm from "../components/finding-form/finding-form.component";
-import type { Finding } from "../types/findings";
+
+import InspectionFindings from "../components/inspection-findings/inspection-findings.component";
 import { findings } from "../data/findings.data";
 import { getSiteForInspection } from "../utils/siteUtils";
 
@@ -28,21 +27,9 @@ const InspectionDetails = () => {
 
     const matchingSite = getSiteForInspection(inspection);
 
-    const [inspectionFindings, setInspectionFindings] = useState<Finding[]>(findings.filter(
-        (finding) => finding.inspectionId === inspection.id) 
-    );
-
-    const handleAddFinding = (title:string, description:string, severity:Finding["severity"]) => {
-        const newFinding: Finding = {
-            id: Date.now(),
-            inspectionId: inspection?.id,
-            title,
-            description,
-            severity
-        };
-          setInspectionFindings((currentFindings) => [...currentFindings, newFinding,]);
-    }
-
+      const inspectionFindings = findings.filter(
+    (finding) => finding.inspectionId === inspection.id
+  );
 
     return (
         <main>
@@ -56,23 +43,10 @@ const InspectionDetails = () => {
             <p>Inspector: {inspection.inspector}</p>
             <p>Status: {inspection.status}</p>
 
-            <section>
-                <h3>Findings</h3>
-                {inspectionFindings.length === 0 ? (
-                    <p>No findings have been recorded.</p>
-                ): (
-                    inspectionFindings.map((finding) => (
-                        <FindingCard
-                            key={finding.id}
-                            finding={finding}
-                        />
-                    ))
-                )
-             }
-             <h3>Add Finding</h3>
-
-             <FindingForm onAddFinding={handleAddFinding} />
-            </section>
+            <InspectionFindings
+                inspectionId={inspection.id}
+                initialFindings={inspectionFindings}
+            />
 
             <Link to="/inspections">
                  ← Back to Inspections
