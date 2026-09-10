@@ -1,3 +1,7 @@
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
 
 header {
   padding: 1rem 2rem;

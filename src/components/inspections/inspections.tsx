@@ -1,4 +1,4 @@
-import InspectionList from "../components/inspection-list/inspection-list.component";
+import InspectionList from "../inspection-list/inspection-list.component";
 
 const Inspections = () => {
     return (

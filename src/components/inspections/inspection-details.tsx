@@ -1,14 +1,18 @@
 
-import { Link, useParams } from "react-router-dom";
-import { inspections } from "../data/inspections.data";
+import Link from "next/link";
+import { inspections } from "@/data/inspections.data";
+import InspectionFindings from "../inspection-findings/inspection-findings.component";
+import { findings } from "@/data/findings.data";
+import { getSiteForInspection } from "@/utils/siteUtils";
 
-import InspectionFindings from "../components/inspection-findings/inspection-findings.component";
-import { findings } from "../data/findings.data";
-import { getSiteForInspection } from "../utils/siteUtils";
+interface InspectionDetailsProps {
+    inspectionId: string;
+}
 
-
-const InspectionDetails = () => {
-    const { inspectionId } = useParams<{inspectionId:string}>();
+const InspectionDetails = ({
+    inspectionId,
+    }: InspectionDetailsProps) => {
+  
     const id = Number(inspectionId);
 
     const inspection = inspections.find((inspection) => inspection.id === id);
@@ -18,7 +22,7 @@ const InspectionDetails = () => {
         <main>
             <h2>Inspection Not Found</h2>
             <p>The requested inspection could not be found.</p>
-                    <Link to="/inspections">
+                    <Link href="/inspections">
           ← Back to Inspections
         </Link>
         </main>
@@ -48,7 +52,7 @@ const InspectionDetails = () => {
                 initialFindings={inspectionFindings}
             />
 
-            <Link to="/inspections">
+            <Link href="/inspections">
                  ← Back to Inspections
             </Link>
         </main>

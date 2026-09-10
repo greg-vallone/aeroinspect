@@ -1,7 +1,8 @@
+"use client"
 import { useState } from "react";
 import { inspections } from "../../data/inspections.data";
 import type { InspectionFilter } from "../../types/inspection";
-import { Link } from "react-router-dom";
+import Link  from "next/link"
 import { getSiteForInspection } from "../../utils/siteUtils";
 
 const InspectionList = () => {
@@ -39,7 +40,7 @@ const InspectionList = () => {
                 return (
                       <div className="inspection-item" key={inspection.id}>
                         <h3>
-                            <Link to={`/inspections/${inspection.id}`}>{matchingSite?.name}</Link>
+                            <Link href={`/inspections/${inspection.id}`}>{matchingSite?.name}</Link>
                         </h3>
                         <p>Date: {inspection.inspectionDate}</p>
                         <p>Inspector: {inspection.inspector}</p>

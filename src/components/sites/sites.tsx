@@ -1,5 +1,5 @@
-import SiteCard from "../components/site-card/site-card.component";
-import { sites } from "../data/sites.data";
+import SiteCard from "./site-card.component";
+import { sites } from "@/data/sites.data";
 
 const Sites = () => {
     return (

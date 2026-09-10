@@ -1,3 +1,4 @@
+"use client"
 import { useState } from "react";
 import FindingCard from "../finding-card/finding-card.component";
 import FindingForm from "../finding-form/finding-form.component";

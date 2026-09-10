@@ -1,6 +1,6 @@
-import StatCard from "../components/stat-card/stat-card.component";
-import InspectionList from "../components/inspection-list/inspection-list.component";
-import { sites } from "../data/sites.data";
+import StatCard from "../stat-card/stat-card.component";
+import InspectionList from "../inspection-list/inspection-list.component";
+import { sites } from "@/data/sites.data";
 
 const Dashboard = () => {
     return (
